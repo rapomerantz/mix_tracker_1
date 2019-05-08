@@ -38,7 +38,7 @@ class Fader extends BaseDevice {
         let faderSections = this.state.subsections.map((sectionNumber) => {
             return <ComponentSubdivision key={sectionNumber} 
                                         sectionNumber={sectionNumber}
-                                        handleValueChange={this.handleValueChange}/>
+                                        onClick={() => this.handleValueChange(sectionNumber)}/>
         })
 
 

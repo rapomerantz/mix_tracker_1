@@ -1,8 +1,8 @@
 .fader_wrapper {
   height: 50em;
   width: 10em;
-  margin: 10%;
-  border: 5px solid slategray;
+  margin: 1%;
+  /* border: 5px solid slategray; */
 }
 
 .fader_border {
