@@ -1,6 +1,17 @@
-.fader_border {
-  height: 35em;
+.fader_wrapper {
+  height: 50em;
   width: 10em;
   margin: 10%;
-  border: 3px solid slategray;
+  border: 5px solid slategray;
+}
+
+.fader_border {
+  height: 25em;
+  width: 8em;
+  margin: 1em;
+}
+
+.component-subsection-wrapper {
+  border: 2px solid red;
+  height: 12%;
 }

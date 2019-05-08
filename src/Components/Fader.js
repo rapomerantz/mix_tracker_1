@@ -1,6 +1,7 @@
 import React from 'react';
 import '../App.css';
-import BaseDevice from './BaseDevice'
+import BaseDevice from './BaseDevice';
+import ComponentSubdivision from './ComponenetSubdivision';
 
 class Fader extends BaseDevice {
     constructor(props) {
@@ -10,26 +11,48 @@ class Fader extends BaseDevice {
             order: 1,
             type: 'fader',
             name: 'Kick Drum',
-            value: 5
+            value: 5,
+            subsections: []
         }
     }
 
-    render () {
+    componentDidMount() {
+        this.renderSubsections(9)
+    }
 
-        let faderSubsection = (
-            <div className='fader-subsection-wrapper'>
-            </div>
-        );
+    renderSubsections(numberOfSections) {
+        let newSubsections = [];
+        for (let i = 1; i <= numberOfSections; i++) {
+            newSubsections.push(i);
+        }
+        this.setState({
+            subsections: newSubsections
+        });
+    }
+
+    handleValueChange = (event) => {
+        console.log(event);
+    }
+
+    render () {
+        let faderSections = this.state.subsections.map((sectionNumber) => {
+            return <ComponentSubdivision key={sectionNumber} 
+                                        sectionNumber={sectionNumber}
+                                        handleValueChange={this.handleValueChange}/>
+        })
 
 
         return (
             <div className='fader_wrapper'>
-                <div className='fader_border'>
-                    <p>Id: {this.state.id}</p>
-                    <p>order: {this.state.order}</p>
-                    <p>device type: {this.state.type}</p>
-                    <p>name: {this.state.name}</p>
-                    <p>value: {this.state.value}</p>
+                <div>
+                    <div>
+                        <pre>
+                            {JSON.stringify(this.state, null, 2)}
+                        </pre>                 
+                    </div>
+                    <div className='fader_border'>
+                        {faderSections}
+                    </div>
                 </div>
             </div>
         );
