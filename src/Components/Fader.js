@@ -1,5 +1,6 @@
 import React from 'react';
 import '../App.css';
+import axios from 'axios';
 import BaseDevice from './BaseDevice';
 import ComponentSubdivision from './ComponenetSubdivision';
 
@@ -16,8 +17,19 @@ class Fader extends BaseDevice {
         }
     }
 
-    componentDidMount() {
+    componentDidMount = () => {
         this.renderSubsections(9)
+        this.getUsers();
+    }
+
+    getUsers = () => {
+        axios.get('/users')
+        .then((response) => {
+          console.log('response data', response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        })
     }
 
     renderSubsections(numberOfSections) {

@@ -3,6 +3,7 @@ import './App.css';
 import Fader from './Components/Fader';
 
 function App() {
+
   return (
     <div className="App">
       <header className="App-header">
