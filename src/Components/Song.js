@@ -1,36 +1,12 @@
 import React from 'react';
 import '../App.css';
-import Mixer from './Mixer'
+import Mixer from './Devices/Mixer';
+import mockSongJson from '../song1';
 
 class Song extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            name: 'Song 1',
-            songId: 1,
-            devices: [
-                {
-                    deviceId: 10,
-                    type:'Mixer',
-                    name: 'First Mixer',
-                    channels: [
-                        {
-                            deviceId: 11,
-                            type: 'ChannelStrip',
-                            name: 'Kick Drum',
-                            components: [
-                                {
-                                    deviceId: 12,
-                                    type: 'Fader',
-                                    name: '',
-                                    value: 5
-                                }
-                            ]
-                        }
-                    ],
-                }
-            ]
-        }
+        this.state = mockSongJson()   
     }
 
     render() {
@@ -40,7 +16,7 @@ class Song extends React.Component {
 
         return (
             <div>
-                <h2>I am a song</h2>
+                <h2>{this.state.songName}</h2>
                 <h2>Here are my devices: </h2>
                 {deviceArray}
             </div>

@@ -1,17 +1,28 @@
-.fader_wrapper {
-  height: 50em;
-  width: 10em;
-  margin: 1%;
-  /* border: 5px solid slategray; */
+.channel-strip-wrapper {
+  margin: 5%;
+  border: 1px solid grey;
+  padding: 2% 2% 0 2%;
+  display: inline-block;
 }
 
-.fader_border {
-  height: 25em;
-  width: 8em;
-  margin: 1em;
+.fader-wrapper {
+  width: 5em;
 }
 
-.component-subsection-wrapper {
-  border: 2px solid red;
-  height: 12%;
+.fader-border {
+  width: 5em;
+}
+
+.fader-subsection-wrapper {
+  border: 1px solid red;
+  height: 2em;
+}
+
+.fader-selected-subsection {
+  background: palevioletred;
+}
+
+.knob-wrapper {
+  border: 1px solid darkblue;
+  height: 5em;
 }

@@ -1,25 +1,21 @@
 import React from 'react';
-import '../App.css';
+import '../../App.css';
 import axios from 'axios';
-import BaseDevice from './BaseDevice';
-import ComponentSubdivision from './ComponenetSubdivision';
+import BaseDeviceComponent from './BaseDeviceComponent';
+import FaderSubsection from './FaderSubsection';
 
-class Fader extends BaseDevice {
+class Fader extends BaseDeviceComponent {
     constructor(props) {
         super(props);
         this.handleClick = this.handleClick.bind(this);
         this.state = {
-            id: 1,
-            order: 1,
-            type: 'fader',
-            name: 'Kick Drum',
-            value: 5,
             subsections: [],
         }
     }
 
     componentDidMount = () => {
         this.renderSubsections(9);
+        this.logComponentType(this.props.component.type)
         // this.getUsers();
     };
 
@@ -35,7 +31,7 @@ class Fader extends BaseDevice {
 
     renderSubsections(numberOfSections) {
         let newSubsections = [];
-        for (let i = 1; i <= numberOfSections; i++) {
+        for (let i = numberOfSections; i >= 1; i--) {
             newSubsections.push(i);
         }
         this.setState({
@@ -52,23 +48,18 @@ class Fader extends BaseDevice {
 
     render () {
         let faderSections = this.state.subsections.map((sectionNumber) => {
-            return <ComponentSubdivision key={sectionNumber} sectionNumber={sectionNumber}
-                                         handleClick={() => this.handleClick(sectionNumber)}/>
+            return <FaderSubsection 
+            key={sectionNumber} 
+            sectionNumber={sectionNumber}
+            handleClick={() => this.handleClick(sectionNumber)}
+            />
         });
 
 
         return (
-            <div className='fader_wrapper'>
-                <div>
-                    <div>
-                        <pre>
-                            {JSON.stringify(this.state, null, 2)}
-                        </pre>                 
-                    </div>
-                    {this.testSection}
-                    <div className='fader_border'>
-                        {faderSections}
-                    </div>
+            <div className='fader-wrapper'>
+                <div className='fader-border'>
+                    {faderSections}
                 </div>
             </div>
         );
