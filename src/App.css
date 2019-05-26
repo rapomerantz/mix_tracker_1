@@ -1,5 +1,5 @@
 .channel-strip-wrapper {
-  margin: 5%;
+  margin: 0 5%;
   border: 1px solid grey;
   padding: 2% 2% 0 2%;
   display: inline-block;
@@ -18,7 +18,7 @@
   height: 2em;
 }
 
-.fader-selected-subsection {
+.fader-subsection-selected {
   background: palevioletred;
 }
 
