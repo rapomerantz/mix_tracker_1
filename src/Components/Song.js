@@ -7,28 +7,56 @@ import axios from 'axios'
 class Song extends React.Component {
     constructor(props) {
         super(props);
-        this.state = mockSongJson()   
+        this.state = {
+            allSongs: [],
+            selectedSong: {
+                devices: []
+            }
+        }
     }
 
-    getUsers = () => {
-        axios.get('/users')
+    componentDidMount() {
+        this.getSongs(1);
+    }
+
+    getSongs = (userId) => {
+        axios.get(`/songs/${userId}`)
         .then((response) => {
-          console.log('response data', response.data);
+            this.setState({
+                allSongs: response.data,
+                selectedSong: response.data[0]
+            })
+            this.getDevices(this.state.selectedSong.song_id)
         })
-        .catch((error) => {
-          console.log(error);
+    }
+
+    getDevices = (songId) => {
+        axios.get(`/devices/${songId}`)
+        .then((response) => {
+            if (response.data) {
+                let currentSongState = this.state.selectedSong;
+                currentSongState.devices = response.data;    
+                this.setState({
+                    selectedSong: currentSongState
+                })
+                this.renderDevices(this.state.selectedSong.devices);
+            }
         })
-    };
+    }
+
+    renderDevices = (devices) => {
+        this.deviceArray = devices.map((device) => {
+            console.log(device)
+            return <Mixer key={device.device_id} device={device} />
+        })
+    }
 
     render() {
-        let deviceArray = this.state.devices.map((device) => {
-            return <Mixer key={device.deviceId} device={device} />
-        });
-
         return (
             <div>
-                <h2>{this.state.songName}</h2>
-                {deviceArray}
+                <pre>{JSON.stringify(this.state, null, 2)}</pre>
+                <h2>Song: {this.state.selectedSong.song_name}</h2>
+                {this.deviceArray}
             </div>
         )
     }
